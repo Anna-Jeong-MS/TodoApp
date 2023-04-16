@@ -26,7 +26,7 @@ def index():
 def connect():
     return "static/html/connect.html"
 
-@app.get('/hckeck')
+@app.get('/hcheck')
 def hcheck():
     return "OK"
 
