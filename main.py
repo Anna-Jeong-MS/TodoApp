@@ -9,7 +9,12 @@ import json
 import aiofiles
 
 from db import db_connection
-from model.models import DBConnection, Todo
+from model.models import DBConnection, Address, InputAddress
+
+import logging
+
+logger = logging.getLogger('uvicorn.error')
+logger.setLevel(logging.DEBUG)
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -41,15 +46,16 @@ async def connect_to_db(dbConnection: DBConnection):
 
     return {"Result": "OK"}
 
-@app.post("/todo/add")
-def add_todo(todo: Todo):
-    db_connection.add_todo(todo)
+@app.post("/address/add")
+def add_todo(address: InputAddress):
+    logger.debug('this is a debug message')
+    db_connection.add_todo(address)
 
-@app.get("/todo/read", response_model=List[Todo])
+@app.get("/address/read", response_model=List[Address])
 def read_todo():
     return db_connection.read_todo()
 
-@app.post("/todo/update")
-def update_todo(todo: Todo):
-    db_connection.update_todo(todo)
+@app.post("/address/update")
+def update_todo(address: Address):
+    db_connection.update_todo(address)
 

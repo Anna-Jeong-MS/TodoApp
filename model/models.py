@@ -8,7 +8,17 @@ class DBConnection(BaseModel):
     admin: str
     password: str
 
-class Todo(BaseModel):
-    todo: str
-    is_done: Optional[int] = 0
-    created: datetime
+class Address(BaseModel):
+    id: int
+    first_name: str
+    last_name: str
+    email: str
+    gender: str
+    ip_address: str
+
+class InputAddress(BaseModel):
+    first_name: str
+    last_name: str
+    email: str
+    gender: str
+    ip_address: str
